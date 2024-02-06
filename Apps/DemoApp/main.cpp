@@ -1,19 +1,29 @@
-#include <rerun.hpp>
-#include <rerun/demo_utils.hpp>
+ #include <rerun.hpp>
 
-using rerun::demo::grid3d;
+ #include <vector>
 
-int main()
-{
-    // Create a new `RecordingStream` which sends data over TCP to the viewer process.
-    const auto rec = rerun::RecordingStream("rerun_example_cpp");
-    // Try to spawn a new viewer instance.
-    rec.spawn().exit_on_failure();
+ int main() {
+     const auto rec = rerun::RecordingStream("rerun_example_mesh3d_indexed");
+     rec.spawn().exit_on_failure();
 
-    // Create some data using the `grid` utility function.
-    std::vector<rerun::Position3D> points = grid3d<rerun::Position3D, float>(-10.f, 10.f, 10);
-    std::vector<rerun::Color>      colors = grid3d<rerun::Color, uint8_t>(0, 255, 10);
+     const rerun::Position3D vertex_positions[3] = {
+         {0.0f, 1.0f, 0.0f},
+         {1.0f, 0.0f, 0.0f},
+         {0.0f, 0.0f, 0.0f},
+     };
+     const rerun::Color vertex_colors[3] = {
+         {0, 0, 255},
+         {0, 255, 0},
+         {255, 0, 0},
+     };
+     const std::vector<uint32_t> indices = {2, 1, 0};
 
-    // Log the "my_points" entity with our data, using the `Points3D` archetype.
-    rec.log("my_points", rerun::Points3D(points).with_colors(colors).with_radii({0.5f}));
-}
+     rec.log(
+         "triangle",
+         rerun::Mesh3D(vertex_positions)
+             .with_vertex_normals({{0.0, 0.0, 1.0}})
+             .with_vertex_colors(vertex_colors)
+             .with_mesh_properties(rerun::components::MeshProperties::from_triangle_indices(indices))
+             .with_mesh_material(rerun::components::Material::from_albedo_factor(0xCC00CCFF))
+     );
+ }
