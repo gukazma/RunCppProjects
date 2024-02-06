@@ -18,7 +18,11 @@
  * 
  * 
 -->
-# Cpp Template Project
+# return
+
+## Dependencies
+
+[rerun-0.12.1](https://github.com/rerun-io/rerun/releases/download/0.12.1/rerun_cpp_sdk.zip)
 
 ## Optional dependencies
 [llvm-project](https://github.com/llvm/llvm-project/releases)

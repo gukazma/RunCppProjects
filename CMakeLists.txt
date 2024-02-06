@@ -9,7 +9,7 @@ if (NOT CMAKE_BUILD_TYPE)
     message(STATUS "No CMAKE_BUILD_TYPE selected, defaulting to ${CMAKE_BUILD_TYPE}")
 endif ()
 
-project(CppTemplateProject VERSION 0.1 LANGUAGES CXX)
+project(RunCppProjects VERSION 0.1 LANGUAGES CXX)
 
 include(CMakeModules/conan.cmake)
 if (CONAN_PROFILE_BUILD AND CONAN_PROFILE_HOST)

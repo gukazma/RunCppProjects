@@ -13,6 +13,7 @@ class ModuleConan(ConanFile):
 
     def requirements(self):
         self.requires("gtest/1.14.0")
+        self.requires("arrow/15.0.0")
         
     def imports(self):
         self.copy("*.dll", "./bin", "bin")

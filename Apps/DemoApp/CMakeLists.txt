@@ -10,5 +10,5 @@ add_executable(${TARGET_NAME} ${CPP_HEAD_FILES} ${CPP_SOUCE_FILES})
 set_target_properties(${TARGET_NAME} PROPERTIES FOLDER Apps)
 
 target_link_libraries(${TARGET_NAME} PRIVATE
-${PROJECT_NAME}::Primitives
+rerun_sdk
 )
